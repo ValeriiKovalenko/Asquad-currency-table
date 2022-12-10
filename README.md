@@ -1,0 +1,1 @@
+# Asquad-currency-table
