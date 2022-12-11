@@ -13,6 +13,6 @@
 - npm i
 - npm start
 
-## Launch:
+## Notice:
 
 - Monobank open API can handle one request per 5min
