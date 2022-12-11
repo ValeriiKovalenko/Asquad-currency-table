@@ -18,9 +18,10 @@ export const useDataGrid = () => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
-    ...(localStorage.getItem("time-stamp") && {
-      enabled: timeStamp < Date.now(),
-    }),
+    ...(localStorage.getItem("time-stamp") &&
+      localStorage.getItem("currency-list") && {
+        enabled: timeStamp < Date.now(),
+      }),
     cacheTime: 3.6e6,
     refetchInterval: 3.6e6, // Refetch every 1 hour if no actions
     onSuccess: () => setTimestamp(Date.now() + 3.6e6),
