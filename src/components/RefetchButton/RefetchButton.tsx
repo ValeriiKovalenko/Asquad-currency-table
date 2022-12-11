@@ -13,13 +13,16 @@ export const RefetchButton = ({
   restart,
   isFetching,
 }: Props) => {
+  const onRefetchData = () => {
+    const hourFromNow = Date.now() + 3.6e6;
+    refetch();
+    setTimestamp(hourFromNow);
+    restart(new Date(hourFromNow), true);
+  };
+
   return (
     <LoadingButton
-      onClick={() => {
-        refetch();
-        setTimestamp(Date.now() + 3.6e6);
-        restart(new Date(Date.now() + 3.6e6), true);
-      }}
+      onClick={onRefetchData}
       loading={isFetching}
       variant="contained"
       sx={{ position: "fixed", right: 50, bottom: 50 }}

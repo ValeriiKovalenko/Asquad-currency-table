@@ -19,7 +19,7 @@ export const useDataGrid = () => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
-    ...(localStorage.getItem("time-stamp") &&
+    ...(localStorage.getItem("time-stamp") && // check in case local storage will be cleared manually
       localStorage.getItem("currency-list") && {
         enabled: timeStamp < Date.now(),
       }),

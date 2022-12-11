@@ -11,8 +11,15 @@ export type IError = {
 };
 
 export type ICurrencyList = ICurrencyRow[];
+
+const BASE_URL = "https://api.monobank.ua";
+
 export const getCurrencyList = async () => {
-  return fetch("https://api.monobank.ua/bank/currency").then(
-    (res) => res.json() as Promise<ICurrencyList | IError>
-  );
+  try {
+    const response = await fetch(`${BASE_URL}/bank/currency`);
+    const data: Promise<ICurrencyList | IError> = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };

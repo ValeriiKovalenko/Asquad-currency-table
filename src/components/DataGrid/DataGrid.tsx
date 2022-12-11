@@ -15,6 +15,8 @@ import { epochToLocalDate } from "../../helpers/convertDate";
 import { convertCurrencyCode } from "../../helpers/convertCurrencyCode";
 import { RefetchButton } from "../RefetchButton/RefetchButton";
 
+const dataGridColumns = ["Currency A", "Currency B", "Date", "Buy", "Sell"];
+
 export const DataGrid = () => {
   const { rows, isFetching, setTimestamp, restart, refetch } = useDataGrid();
 
@@ -35,17 +37,20 @@ export const DataGrid = () => {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>currencyCodeA</TableCell>
-              <TableCell align="right">currencyCodeB</TableCell>
-              <TableCell align="right">date</TableCell>
-              <TableCell align="right">rateBuy</TableCell>
-              <TableCell align="right">rateSell</TableCell>
+              {dataGridColumns.map((column, idx) => (
+                <TableCell
+                  key={`${idx}-currency-column`}
+                  align={idx ? "right" : "left"}
+                >
+                  {column}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row, idx) => (
               <TableRow
-                key={idx}
+                key={`${idx}-currency-row`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <Tooltip
