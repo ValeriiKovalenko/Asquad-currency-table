@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
-import { getCurrencyList, ICurrencyList, IError } from "../api/requests";
+import { getCurrencyList, ICurrencyList } from "../api/requests";
 import useLocalStorage from "./useLocalStorage";
 
 export const useDataGrid = () => {
-  const [rows, setRows] = useState<ICurrencyList | IError | null>(null);
-  const [localData, setLocalData] = useLocalStorage<
-    ICurrencyList | IError | null
-  >("currency-list", null);
+  const [rows, setRows] = useState<ICurrencyList | null>(null);
+  const [localData, setLocalData] = useLocalStorage<ICurrencyList | null>(
+    "currency-list",
+    null
+  );
   const [timeStamp, setTimestamp] = useLocalStorage<number>("time-stamp", 0);
 
   const $currencyList = useQuery({

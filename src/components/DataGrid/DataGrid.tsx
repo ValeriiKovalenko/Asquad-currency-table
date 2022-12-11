@@ -3,7 +3,6 @@ import {
   Box,
   LinearProgress,
   Tooltip,
-  Typography,
   Paper,
   TableRow,
   TableHead,
@@ -14,7 +13,7 @@ import {
 } from "@mui/material";
 import { epochToLocalDate } from "../../helpers/convertDate";
 import { convertCurrencyCode } from "../../helpers/convertCurrencyCode";
-import { LoadingButton } from "@mui/lab";
+import { RefetchButton } from "../RefetchButton/RefetchButton";
 
 export const DataGrid = () => {
   const { rows, isFetching, setTimestamp, restart, refetch } = useDataGrid();
@@ -22,26 +21,15 @@ export const DataGrid = () => {
   if (!rows) {
     return <LinearProgress />;
   }
-  if ("errorDescription" in rows) {
-    console.log(rows.errorDescription);
-
-    return <Typography>{rows.errorDescription}</Typography>;
-  }
 
   return (
     <Box sx={{ position: "relative" }}>
-      <LoadingButton
-        onClick={() => {
-          refetch();
-          setTimestamp(Date.now() + 3.6e6);
-          restart(new Date(Date.now() + 3.6e6), true);
-        }}
-        loading={isFetching}
-        variant="contained"
-        sx={{ position: "fixed", right: 50, bottom: 50 }}
-      >
-        Refetch data
-      </LoadingButton>
+      <RefetchButton
+        refetch={refetch}
+        setTimestamp={setTimestamp}
+        restart={restart}
+        isFetching={isFetching}
+      />
       {isFetching && <LinearProgress />}
       <TableContainer component={Paper}>
         <Table size="small">
